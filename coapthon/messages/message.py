@@ -1,6 +1,7 @@
 from coapthon.utils import parse_blockwise
 from coapthon import defines
 from coapthon.messages.option import Option
+from socket import gethostbyname
 
 __author__ = 'Giacomo Tanganelli'
 
@@ -170,6 +171,7 @@ class Message(object):
         """
         if value is not None and (not isinstance(value, tuple) or len(value)) != 2:
             raise AttributeError
+        value = (gethostbyname(value[0]), value[1]) if value else None
         self._destination = value
 
     @property
